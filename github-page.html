@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daniel Arregui Chavarria</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --ink: #1a1814;
+      --ink2: #5a5650;
+      --ink3: #9a9590;
+      --paper: #faf8f4;
+      --paper2: #f2efe8;
+      --rule: #e0dcd4;
+      --mono: 'Geist Mono', monospace;
+      --serif: 'EB Garamond', Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: rgba(250,248,244,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 3rem;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-name { font-family: var(--serif); font-size: 1rem; font-weight: 500; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--ink2);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* HERO */
+    .hero { padding: 140px 0 96px; border-bottom: 1px solid var(--rule); }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--ink3);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.8rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--ink2); }
+    .hero-lead {
+      font-size: 1.05rem;
+      color: var(--ink2);
+      max-width: 520px;
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+    }
+    .hero-meta { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+    .meta-item {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--ink3);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .meta-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ink3); display: inline-block; }
+
+    /* SECTIONS */
+    section { padding: 72px 0; border-bottom: 1px solid var(--rule); }
+    section:last-of-type { border-bottom: none; }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--ink3);
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+    /* SOBRE MÍ */
+    .about-body p { color: var(--ink2); margin-bottom: 1rem; font-size: 1rem; }
+    .about-body p:last-child { margin-bottom: 0; }
+    .about-body strong { color: var(--ink); font-weight: 500; }
+    .about-figures {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      margin-top: 2.5rem;
+    }
+    .figure-box { background: var(--paper); padding: 1.5rem 1.2rem; text-align: center; }
+    .figure-n {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .figure-l {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--ink3);
+      text-transform: uppercase;
+    }
+
+    /* IDIOMAS */
+    .lang-list { display: flex; flex-direction: column; }
+    .lang-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 80px;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .lang-row:first-child { border-top: 1px solid var(--rule); }
+    .lang-name { font-family: var(--serif); font-size: 1rem; font-weight: 500; }
+    .lang-bar { height: 1px; background: var(--rule); position: relative; }
+    .lang-bar-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: var(--ink);
+      width: 0;
+      transition: width 1s cubic-bezier(0.23,1,0.32,1);
+    }
+    .lang-level {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--ink3);
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    /* SKILLS */
+    .skill-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 80px;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .skill-row:first-child { border-top: 1px solid var(--rule); }
+    .skill-name-col { font-family: var(--serif); font-size: 1rem; font-weight: 500; }
+    .skill-bar-col { height: 1px; background: var(--rule); position: relative; }
+    .skill-bar-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: var(--ink);
+      width: 0;
+      transition: width 1s cubic-bezier(0.23,1,0.32,1);
+    }
+    .skill-level-col {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--ink3);
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    /* PROYECTOS */
+    .projects-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .project-card {
+      border: 1px solid var(--rule);
+      padding: 2rem;
+      background: var(--paper);
+      transition: background 0.2s;
+    }
+    .project-card:hover { background: var(--paper2); }
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+    }
+    .project-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; }
+    .project-badge {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--rule);
+      color: var(--ink3);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .project-badge.active { border-color: var(--ink); color: var(--ink); }
+    .project-desc { font-size: 0.95rem; color: var(--ink2); margin-bottom: 1.2rem; line-height: 1.75; }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--ink2);
+      background: var(--paper2);
+      border: 1px solid var(--rule);
+      padding: 0.2rem 0.55rem;
+    }
+    .doc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--ink2);
+      border: 1px solid var(--rule);
+      padding: 0.4rem 0.9rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .doc-link:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* CERTIFICACIONES */
+    .cert-list { display: flex; flex-direction: column; }
+    .cert-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 0 2rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .cert-item:first-child { border-top: 1px solid var(--rule); }
+    .cert-date {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: var(--ink3);
+      padding-top: 0.2rem;
+    }
+    .cert-name { font-family: var(--serif); font-size: 1rem; font-weight: 500; margin-bottom: 0.1rem; }
+    .cert-org {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: var(--ink3);
+    }
+
+    /* EXPERIENCIA */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 0 2rem;
+      padding-bottom: 2rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .exp-date {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: var(--ink3);
+      padding-top: 0.25rem;
+      line-height: 1.5;
+    }
+    .exp-role { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; margin-bottom: 0.1rem; }
+    .exp-org {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: var(--ink3);
+      margin-bottom: 0.7rem;
+    }
+    .exp-desc { font-size: 0.92rem; color: var(--ink2); line-height: 1.75; }
+
+    /* CONTACTO */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink2);
+      transition: color 0.2s;
+    }
+    .contact-link:first-child { border-top: 1px solid var(--rule); }
+    .contact-link:hover { color: var(--ink); }
+    .contact-link-left { display: flex; flex-direction: column; gap: 0.1rem; }
+    .contact-link-type {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--ink3);
+      text-transform: uppercase;
+    }
+    .contact-link-val { font-family: var(--serif); font-size: 0.95rem; }
+    .contact-arrow { font-family: var(--mono); font-size: 0.8rem; color: var(--ink3); transition: transform 0.2s, color 0.2s; }
+    .contact-link:hover .contact-arrow { transform: translateX(4px); color: var(--ink); }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+    }
+    footer span {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--ink3);
+    }
+
+    /* ANIMATIONS */
+    .fade { opacity: 0; transform: translateY(14px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade.in { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+      nav { display: none; }
+      .hero { padding: 64px 0 56px; }
+      .skill-row, .lang-row { grid-template-columns: 100px 1fr 52px; gap: 0.6rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .exp-item, .cert-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      .about-figures { grid-template-columns: repeat(2, 1fr); }
+      footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-name">Daniel Arregui Chavarria</span>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre mí</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#experiencia">Experiencia</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- HERO -->
+    <header class="hero fade">
+      <p class="hero-eyebrow">Técnico ASIR · Gelves, Sevilla</p>
+      <h1>Daniel<br/>Arregui<br/>Chavarria<br/></h1>
+      <p class="hero-lead">
+        Técnico Superior en Administración de Sistemas Informáticos en Red,
+        con experiencia en soporte IT y gestión empresarial. Certificado en Azure.
+        Construyendo cosas mientras sigo aprendiendo.
+      </p>
+      <div class="hero-meta">
+        
+        <span class="meta-item">
+          <span class="meta-dot"></span>
+          dani.archa@gmail.com
+        </span>
+        <span class="meta-item">
+          <span class="meta-dot"></span>
+          651 191 896
+        </span>
+      </div>
+    </header>
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre">
+      <p class="section-label">Sobre mí</p>
+      <div class="about-body fade">
+        <p>
+          Titulado en <strong>Administración de Sistemas Informáticos en Red (ASIR)</strong>
+          por el IES Triana, con formación sólida en redes, sistemas operativos,
+          virtualización, seguridad y servicios en red.
+        </p>
+        <p>
+          He trabajado como <strong>técnico CAU en Minsait</strong> resolviendo incidencias
+          de forma remota y preparando equipos, y durante varios años como
+          <strong>administrativo en Aertis ETT</strong> para Quantyca, validando facturas
+          de forma remota.
+        </p>
+        <p>
+          Formación de <strong>Microsoft Azure Administrator Associate (AZ-104)</strong>
+          y la de competencias digitales de Google. Fuera del trabajo dedico tiempo
+          a proyectos propios y a seguir formándome en desarrollo y sistemas.
+        </p>
+      </div>
+      <div class="about-figures fade">
+        <div class="figure-box">
+          <span class="figure-n">3+</span>
+          <span class="figure-l">Años exp.</span>
+        </div>
+        <div class="figure-box">
+          <span class="figure-n">2</span>
+          <span class="figure-l">Certificaciones</span>
+        </div>
+        <div class="figure-box">
+          <span class="figure-n">B1</span>
+          <span class="figure-l">Inglés</span>
+        </div>
+        <div class="figure-box">
+          <span class="figure-n">∞</span>
+          <span class="figure-l">Curiosidad</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- IDIOMAS -->
+    <section id="idiomas">
+      <p class="section-label">Idiomas</p>
+      <div class="lang-list fade">
+        <div class="lang-row">
+          <span class="lang-name">Español</span>
+          <div class="lang-bar"><div class="lang-bar-fill" data-w="100"></div></div>
+          <span class="lang-level">Nativo</span>
+        </div>
+        <div class="lang-row">
+          <span class="lang-name">Inglés</span>
+          <div class="lang-bar"><div class="lang-bar-fill" data-w="65"></div></div>
+          <span class="lang-level">B1 → C1</span>
+        </div>
+      </div>
+      <p style="font-family:var(--mono);font-size:0.68rem;font-weight:300;letter-spacing:0.04em;color:var(--ink3);margin-top:1rem;">
+        Cursado nivel B2 y actualmente en formación para certificación C1.
+      </p>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section id="skills">
+      <p class="section-label">Habilidades</p>
+      <div class="skills-list fade">
+        <div class="skill-row">
+          <span class="skill-name-col">Sistemas & Redes</span>
+          <div class="skill-bar-col"><div class="skill-bar-fill" data-w="80"></div></div>
+          <span class="skill-level-col">Sólido</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name-col">Azure</span>
+          <div class="skill-bar-col"><div class="skill-bar-fill" data-w="70"></div></div>
+          <span class="skill-level-col">Certificado</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name-col">Equipos & CAU</span>
+          <div class="skill-bar-col"><div class="skill-bar-fill" data-w="72"></div></div>
+          <span class="skill-level-col">Experiencia</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name-col">HTML & CSS</span>
+          <div class="skill-bar-col"><div class="skill-bar-fill" data-w="55"></div></div>
+          <span class="skill-level-col">Básico</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name-col">PHP</span>
+          <div class="skill-bar-col"><div class="skill-bar-fill" data-w="40"></div></div>
+          <span class="skill-level-col">Básico</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name-col">WordPress</span>
+          <div class="skill-bar-col"><div class="skill-bar-fill" data-w="45"></div></div>
+          <span class="skill-level-col">Básico</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name-col">Python</span>
+          <div class="skill-bar-col"><div class="skill-bar-fill" data-w="28"></div></div>
+          <span class="skill-level-col">Aprendiendo</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name-col">Redis</span>
+          <div class="skill-bar-col"><div class="skill-bar-fill" data-w="55"></div></div>
+          <span class="skill-level-col">Intermedio</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name-col">Ofimática</span>
+          <div class="skill-bar-col"><div class="skill-bar-fill" data-w="85"></div></div>
+          <span class="skill-level-col">Avanzado</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos">
+      <p class="section-label">Proyectos</p>
+      <div class="projects-list">
+        <div class="project-card fade">
+          <div class="project-header">
+            <span class="project-title">Despliegue y seguridad de Redis en clúster</span>
+            <span class="project-badge">Completado</span>
+          </div>
+          <p class="project-desc">
+            Implementación de autenticación, cifrado de comunicaciones, replicación
+            y uso de Sentinel para supervisión y failover automático. Incluye configuración
+            de copias de seguridad automáticas y alta disponibilidad.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Redis</span>
+            <span class="tag">Sentinel</span>
+            <span class="tag">Cluster</span>
+            <span class="tag">Alta disponibilidad</span>
+            <span class="tag">Seguridad</span>
+          </div>
+          <a href="Redis_despliegue_y_seguridad.pdf" target="_blank" class="doc-link">
+            Ver documentación ↗
+          </a>
+        </div>
+        <div class="project-card fade">
+          <div class="project-header">
+            <span class="project-title">Web interactiva comunitaria</span>
+            <span class="project-badge active">En desarrollo</span>
+          </div>
+          <p class="project-desc">
+            Plataforma web orientada a conectar a una comunidad local. Funcionalidades
+            dinámicas para la participación vecinal, con diseño interactivo y gestión
+            de contenido propio.
+          </p>
+          <div class="project-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">PHP</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICACIONES -->
+    <section id="certificaciones">
+      <p class="section-label">Certificaciones y formaciones</p>
+      <div class="cert-list fade">
+        <div class="cert-item">
+          <span class="cert-date">2025</span>
+          <div>
+            <div class="cert-name">Microsoft Azure Administrator Associate</div>
+            <div class="cert-org">Microsoft Learn</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <span class="cert-date">2025</span>
+          <div>
+            <div class="cert-name">Competencias digitales para profesionales</div>
+            <div class="cert-org">Google.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCIA -->
+    <section id="experiencia">
+      <p class="section-label">Experiencia</p>
+      <div>
+        <div class="exp-item fade">
+          <div class="exp-date">Ene 2026</div>
+          <div>
+            <div class="exp-role">Administrativo</div>
+            <div class="exp-org">Aertis ETT (Quantyca) · Sevilla</div>
+            <p class="exp-desc">
+              Validación de facturas de forma remota para Quantyca.
+            </p>
+          </div>
+        </div>
+        <div class="exp-item fade">
+          <div class="exp-date">Oct–Dic 2025</div>
+          <div>
+            <div class="exp-role">Técnico CAU</div>
+            <div class="exp-org">Minsait (Sevilla Innovación) · Sevilla</div>
+            <p class="exp-desc">
+              Contrato de prácticas. Resolución de incidencias de forma remota,
+              preparación de equipos para nuevos usuarios, despiece y montaje
+              de equipos portátiles.
+            </p>
+          </div>
+        </div>
+        <div class="exp-item fade">
+          <div class="exp-date">2020–2023</div>
+          <div>
+            <div class="exp-role">Administrativo</div>
+            <div class="exp-org">Aertis ETT (Quantyca) · Sevilla</div>
+            <p class="exp-desc">
+              Validación y gestión de facturas de forma remota para Quantyca.
+              Control de documentación y coordinación con proveedores.
+            </p>
+          </div>
+        </div>
+        <div class="exp-item fade">
+          <div class="exp-date">Jun 2019</div>
+          <div>
+            <div class="exp-role">Figurante</div>
+            <div class="exp-org">Son de Casting · Sevilla</div>
+            <p class="exp-desc">
+              Participación como figurante en la película española "Operación Camarón".
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMACIÓN -->
+    <section id="formacion">
+      <p class="section-label">Formación</p>
+      <div>
+        <div class="exp-item fade">
+          <div class="exp-date">2023–2026</div>
+          <div>
+            <div class="exp-role">Técnico Superior en ASIR</div>
+            <div class="exp-org">IES Triana · Sevilla</div>
+            <p class="exp-desc">
+              Administración de Sistemas Informáticos en Red. Redes, sistemas operativos,
+              servicios, seguridad, virtualización y bases de datos.
+            </p>
+          </div>
+        </div>
+        <div class="exp-item fade">
+          <div class="exp-date">2019–2022</div>
+          <div>
+            <div class="exp-role">Trabajo Social y Sociología</div>
+            <div class="exp-org">Universidad Pablo de Olavide · Sevilla</div>
+            <p class="exp-desc">
+              Tres años cursando materias de trabajo social y antropología.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <p class="section-label">Contacto</p>
+      <div class="contact-grid">
+        <div class="fade">
+          <p style="font-size:1rem;color:var(--ink2);line-height:1.8;">
+            Abierto a nuevas oportunidades, colaboraciones o simplemente
+            a una conversación sobre tecnología. Escríbeme sin compromiso.
+          </p>
+        </div>
+        <div class="fade">
+          <a href="mailto:dani.archa@gmail.com" class="contact-link">
+            <div class="contact-link-left">
+              <span class="contact-link-type">Email</span>
+              <span class="contact-link-val">dani.archa@gmail.com</span>
+            </div>
+            <span class="contact-arrow">→</span>
+          </a>
+          <a href="tel:651191896" class="contact-link">
+            <div class="contact-link-left">
+              <span class="contact-link-type">Teléfono</span>
+              <span class="contact-link-val">651 191 896</span>
+            </div>
+            <span class="contact-arrow">→</span>
+          </a>
+          <a href="https://github.com/ChavarriaD" target="_blank" class="contact-link">
+            <div class="contact-link-left">
+              <span class="contact-link-type">GitHub</span>
+              <span class="contact-link-val">github.com/ChavarriaD</span>
+            </div>
+            <span class="contact-arrow">→</span>
+          </a>
+          <div class="contact-link" style="cursor:default;">
+            <div class="contact-link-left">
+              <span class="contact-link-type">Ubicación</span>
+              <span class="contact-link-val">Gelves, Sevilla</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>© Daniel Arregui Chavarria</span>
+      <span>Gelves, Sevilla · España</span>
+    </footer>
+
+  </div>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+    const barObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.skill-bar-fill, .lang-bar-fill').forEach(b => {
+            setTimeout(() => b.style.width = b.dataset.w + '%', 200);
+          });
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.skills-list, .lang-list').forEach(el => barObs.observe(el));
+  </script>
+</body>
+</html>
